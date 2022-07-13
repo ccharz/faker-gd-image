@@ -1,0 +1,35 @@
+{
+    "name": "ccharz/faker-gd-image",
+    "description": "FakerPHP Provider to create random images with the help of gd",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christian Charzewski",
+            "email": "chris@cw-software.at",
+            "role": "Developer"
+        }
+    ],
+    "keywords": ["faker", "fakerphp", "provider", "image", "gd"],
+    "require": {
+        "php": "^8.0",
+        "ext-gd": "*",
+        "fakerphp/faker": "^1.19"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Faker\\Provider\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Faker\\Tests\\Provider\\": "tests/"
+        }
+    }
+}
