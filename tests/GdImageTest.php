@@ -80,19 +80,22 @@ class GdImageTest extends TestCase
     /**
      * @return void
      */
-    public function testGenerationWithChecksum(): void
+    public function testGrayBackground(): void
     {
         $faker = \Faker\Factory::create();
         $faker->addProvider(new \Faker\Provider\GdImage($faker));
-        $result = $faker->gdImage(__DIR__, 200, 150, 'ASD asdjajsdjkasdnasd asd as d asd as d asd as d asd asdsaadsasdasdasd asdasd', true, false, null, true);
+        $gd_image = $faker->gdImageObject(200, 150, 'ASD asdjajsdjkasdnasd asd as d asd as d asd as d asd asdsaadsasdasdasd asdasd');
 
-        $this->assertNotNull($result);
-        $this->assertSame(
-            'bac20fb51573579c0586e909c443ceff',
-            \md5_file($result)
-        );
+        $this->assertNotNull($gd_image);
 
-        unlink($result);
+        $bg_color = \imagecolorat($gd_image, 0, 0);
+        $colors = \imagecolorsforindex($gd_image, $bg_color);
+
+        \imagedestroy($gd_image);
+
+        $this->assertSame(204, $colors['red']);
+        $this->assertSame(204, $colors['green']);
+        $this->assertSame(204, $colors['blue']);
     }
 
     /**

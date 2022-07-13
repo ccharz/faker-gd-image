@@ -21,16 +21,16 @@ $image_path = $provider->gdImage(null, 640, 480);
 To use it in laravel factories you can add this to the `AppServiceProvider.php` boot method:
 
 ```php
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $faker = $this->app->make(\Faker\Generator::class);
-        $faker->addProvider(new \Faker\Provider\GdImage($faker));
-    }
+/**
+ * Bootstrap any application services.
+ *
+ * @return void
+ */
+public function boot()
+{
+    $faker = $this->app->make(\Faker\Generator::class);
+    $faker->addProvider(new \Faker\Provider\GdImage($faker));
+}
 ```
 
 ## Acknowledgment
