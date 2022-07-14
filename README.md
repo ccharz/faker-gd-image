@@ -13,23 +13,30 @@ composer require ccharz/faker-gd-image
 $faker = \Faker\Factory::create();
 $faker->addProvider(new \Faker\Provider\GdImage($faker));
 
-$image_path = $provider->gdImage(null, 640, 480);
+// Stores a generated image in the systems tmp folder
+$image_path = $provider->gdImage($dir = null, $width = 640, $height = 480);
+
+// Returns a gd image object
+$gd_image = $provider->gdImageObject($width = 640, $height = 480, $text = 'Test', $background_color = '6A6A6A');
 ```
 
 ## Usage in Laravel
 
-To use it in laravel factories you can add this to the `AppServiceProvider.php` boot method:
+To use it in laravel factories you could add this to the `AppServiceProvider.php`:
 
 ```php
 /**
- * Bootstrap any application services.
+ * Register any application services.
  *
  * @return void
  */
-public function boot()
+public function register()
 {
-    $faker = $this->app->make(\Faker\Generator::class);
-    $faker->addProvider(new \Faker\Provider\GdImage($faker));
+    $this->app->singleton(\Faker\Generator::class, function () {
+        $faker = \Faker\Factory::create();
+        $faker->addProvider(new \Faker\Provider\GdImage($faker));
+        return $faker;
+    });
 }
 ```
 
