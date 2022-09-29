@@ -14,10 +14,10 @@ $faker = \Faker\Factory::create();
 $faker->addProvider(new \Faker\Provider\GdImage($faker));
 
 // Stores a generated image in the systems tmp folder
-$image_path = $provider->gdImage($dir = null, $width = 640, $height = 480);
+$image_path = $faker->gdImage($dir = null, $width = 640, $height = 480);
 
 // Returns a gd image object
-$gd_image = $provider->gdImageObject($width = 640, $height = 480, $text = 'Test', $background_color = '6A6A6A');
+$gd_image = $faker->gdImageObject($width = 640, $height = 480, $text = 'Test', $background_color = '6A6A6A');
 ```
 
 ## Usage in Laravel
