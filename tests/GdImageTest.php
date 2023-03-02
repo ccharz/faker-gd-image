@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class GdImageTest extends TestCase
 {
-    public function gdImageParameterProvider(): array
+    public static function gdImageParameterProvider(): array
     {
         return [
             'basic' => [
@@ -106,6 +106,6 @@ class GdImageTest extends TestCase
         $this->expectException('InvalidArgumentException');
         $faker = FakerFactory::create();
         $provider = new GdImage($faker);
-        $result = $provider->gdImage(__FILE__, 200, 150, 'test', true, false, null, false);
+        $provider->gdImage(__FILE__, 200, 150, 'test', true, false, null, false);
     }
 }

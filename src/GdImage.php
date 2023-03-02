@@ -141,7 +141,7 @@ class GdImage extends Base
         $image_text = ''
             . ($category ? ' ' . $category : '')
             . ($word ? ' ' . $word : '')
-            . ($randomize ? ' ' . $this->generator->word : '');
+            . ($randomize ? ' ' . $this->generator->word() : '');
 
         $background_color = $gray === true ? 'CCC' : $this->generator->safeHexColor();
 
