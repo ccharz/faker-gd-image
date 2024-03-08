@@ -1,16 +1,10 @@
 name: Tests
 
-on:
-  push:
-    branches:
-    - "*"
-  pull_request:
-    branches:
-    - "*"
+on: [push]
 
 jobs:
   php-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 15
     env:
       COMPOSER_NO_INTERACTION: 1
@@ -18,14 +12,13 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [8.2, 8.1, 8.0]
-        phpunit-versions: ['9']
+        php: [8.3, 8.2, 8.1, 8.0]
 
-    name: P${{ matrix.php }} - PHPUnit ${{ matrix.phpunit-versions }}
+    name: PHP ${{ matrix.php }}
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
@@ -33,11 +26,10 @@ jobs:
         php-version: ${{ matrix.php }}
         coverage: pcov
         extensions: gd
-        tools: phpunit:${{ matrix.phpunit-versions }}
 
     - name: Install dependencies
       run: |
-        composer install --prefer-dist
+        composer update --prefer-dist --no-interaction --no-progress
 
     - name: Execute Unit Tests
       run: composer test
